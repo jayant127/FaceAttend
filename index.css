@@ -1,0 +1,44 @@
+@font-face {
+    font-family: "Saria";
+    src: url("fonts\SairaStencil-VariableFont_wdth,wght.ttf");
+}
+
+.Header{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding: 20px;
+    background-color: black;
+}
+.Header-title{
+    color: white;
+    font-family: "Saria", sans-serif;
+    font-size: 24px;
+    margin: 0;
+    margin-left: 5px;
+}
+.Login{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: rgb(0, 0, 0);
+}
+.Login-title{
+    color: white;
+    font-family: "Saria", sans-serif;
+    font-size: 24px;
+    margin: 0;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+#Username, #Password,#Submit{
+    border-radius: 10px;
+    height: 30px;
+    width: 200px;
+    margin: 5px;
+}
+.Submit{
+    border-radius: 30px;
+}
