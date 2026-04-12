@@ -1,31 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="index.css">
-    <title>Face-Attend</title>
+    <title>FaceAttend - Login</title>
 </head>
+
 <body>
-    <!-- <div class="Header">
-        <img src="assets\Logo.png" alt="Face-Attend Logo" width="15" height="15">
-        <h1 class="Header-title">FACE ATTEND</h1>
-    </div> -->
+    <!-- Background Video -->
+    <video autoplay muted loop id="bg-video">
+        <source src="assets/BgVideo.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+    </video>
+
+    <!-- Dark Overlay for better contrast -->
+    <div class="overlay"></div>
+
     <div class="Login">
         <form>
-            <h2>Login</h2>
+            <div class="logo-container">
+                <img src="assets\Logo.png" class="logo">
+                <h2>FaceAttend</h2>
+            </div>
+
+            <p class="subtitle">Welcome back! Please login to your account.</p>
+
             <div class="Input">
                 <input id="Username" type="text" name="username" placeholder="Username" required>
-                <label for="Username"</label>
             </div>
             <div class="Input">
                 <input id="Password" type="password" name="password" placeholder="Password" required>
-                <label for="Password"></label>
             </div>
+
+            <div class="options">
+                <label class="remember-me">
+                    <input type="checkbox"> Remember me
+                </label>
+                <a href="#" class="forgot-password">Forgot Password?</a>
+            </div>
+
             <div class="Submit">
-                <button id="Submit" type="submit">Login</button>
+                <button id="SubmitBtn" type="submit">Log In</button>
             </div>
-            <p>Dont have an account? <a href="#">Sign up</a></p>
+            <div class="Signup">
+                <p>Don't have an account? <a href="#">Sign up</a></p>
+            </div>
         </form>
     </div>
-
 </body>
+
 </html>

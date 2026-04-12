@@ -1,85 +1,258 @@
 @font-face {
-    font-family: "Saria";
-    src: url("fonts\SairaStencil-VariableFont_wdth,wght.ttf");
+    font-family: "Saira";
+    src: url("fonts/SairaStencil-VariableFont_wdth,wght.ttf") format("truetype");
 }
-*{
+
+:root {
+    --primary-color: #00d2ff;
+    --primary-light: #3a7bd5;
+    --text-main: #ffffff;
+    --text-muted: rgba(255, 255, 255, 0.7);
+    --glass-bg: rgba(255, 255, 255, 0.08); /* More translucent */
+    --glass-border: rgba(255, 255, 255, 0.15);
+    --glass-shadow: rgba(0, 0, 0, 0.4);
+}
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Saria", sans-serif;
+    font-family: "Saira", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
-body{
+
+body {
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
+    background-color: #111; 
+    overflow: hidden;
 }
 
-.Header{
-    display: flex;
-    justify-content: left;
-    align-items: center;
-    padding: 20px;
-    background-color: black;
+/* Background Video */
+#bg-video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -2;
+    object-fit: cover;
 }
-.Header-title{
-    color: white;
-    font-family: "Saria", sans-serif;
-    font-size: 24px;
-    margin: 0;
-    margin-left: 5px;
+
+/* Overlay for better readability */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(135deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.8) 100%);
+    z-index: -1;
 }
-.Login{
+
+/* Glassmorphism Login Container */
+.Login {
     position: relative;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 450px;
-    width: 400px;
-    background-color: rgb(79, 237, 255);
-    border-radius: 20px;
+    width: 420px;
+    padding: 45px 40px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 10px 40px var(--glass-shadow);
+    border-radius: 24px;
+    z-index: 1;
+    animation: floatIn 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-/* 
-#Username, #Password,#Submit{
-    border-radius: 10px;
-    height: 30px;
-    width: 200px;
-    margin: 5px;
-    border: none;
-} */
 
-/* .Submit{
-    border-radius: 30px;
-} */
+.Login:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 50px var(--glass-shadow);
+}
 
-h2{
-    color: rgb(255, 255, 255);
-    font-size: 30px;
+@keyframes floatIn {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Form structure */
+form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Logo and Header */
+.logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.logo {
+    width: 65px;
+    height: 65px;
+    margin-bottom: 12px;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+    object-fit: contain;
+}
+
+h2 {
+    color: var(--text-main);
+    font-size: 34px;
+    font-weight: 600;
     text-align: center;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
-.Input{
-    width: 300px;
-    border-bottom: 2px solid black;
-    
-}
-.Input input{
 
-    background: transparent;
-    border: none;
+.subtitle {
+    color: var(--text-muted);
+    font-size: 15px;
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+/* Input Fields */
+.Input {
+    position: relative;
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+.Input input {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 14px;
     outline: none;
     width: 100%;
-    height: 50px;
-    font-size: 1em;
-    color: rgb(255, 255, 255);
+    height: 55px;
+    padding: 0 20px;
+    font-size: 16px;
+    color: var(--text-main);
+    transition: all 0.3s ease;
 }
-#Submit{
-    margin-top: 10px;
-    width: 300px;
-    height: 40px;
-    background-color: rgb(255, 255, 255);
-    color: rgb(0, 0, 0);
-    border: none;
-    border-radius: 30px;
-    font-size: 1em;
+
+.Input input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+    transition: opacity 0.3s ease;
+}
+
+.Input input:focus {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 15px rgba(0, 210, 255, 0.2);
+}
+
+.Input input:focus::placeholder {
+    opacity: 0;
+}
+
+/* Options (Remember me, Forgot Password) */
+.options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 35px;
+    font-size: 14px;
+}
+
+.remember-me {
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
     cursor: pointer;
+    transition: color 0.3s;
+}
+
+.remember-me:hover {
+    color: var(--text-main);
+}
+
+.remember-me input {
+    margin-right: 10px;
+    cursor: pointer;
+    accent-color: var(--primary-color);
+    width: 16px;
+    height: 16px;
+}
+
+.forgot-password {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.forgot-password:hover {
+    color: #fff;
+    text-shadow: 0 0 8px var(--primary-color);
+}
+
+/* Submit Button */
+.Submit {
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+#SubmitBtn {
+    width: 100%;
+    height: 55px;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+    color: #fff;
+    border: none;
+    border-radius: 14px;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 210, 255, 0.3);
+}
+
+#SubmitBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 210, 255, 0.4);
+}
+
+#SubmitBtn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 10px rgba(0, 210, 255, 0.3);
+}
+
+/* Sign Up Text */
+.Signup {
+    text-align: center;
+    font-size: 15px;
+    color: var(--text-muted);
+}
+
+.Signup a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin-left: 5px;
+}
+
+.Signup a:hover {
+    color: #fff;
+    text-shadow: 0 0 8px var(--primary-color);
+    text-decoration: underline;
 }
