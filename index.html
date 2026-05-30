@@ -27,6 +27,11 @@
 
             <p class="subtitle">Welcome back! Please login to your account.</p>
 
+            <!-- Error Banner -->
+            <div id="error-message" class="error-banner" style="display: none; color: #ff5252; background: rgba(255, 82, 82, 0.1); border: 1px solid rgba(255, 82, 82, 0.25); padding: 12px; border-radius: 12px; margin-bottom: 25px; text-align: center; font-size: 14px; backdrop-filter: blur(5px); box-shadow: 0 4px 10px rgba(0,0,0,0.15); animation: shake 0.5s ease-in-out;">
+                Invalid username or password! Please try again.
+            </div>
+
             <div class="Input">
                 <input id="Username" type="text" name="username" placeholder="Username" required>
             </div>
@@ -49,6 +54,23 @@
             </div>
         </form>
     </div>
+
+    <!-- Error shake keyframes & simple client-side error check -->
+    <style>
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-6px); }
+            75% { transform: translateX(6px); }
+        }
+    </style>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('error') === 'invalid') {
+            document.getElementById('error-message').style.display = 'block';
+            // Clear parameter from URL bar for clean refreshing
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }
+    </script>
 </body>
 
 </html>

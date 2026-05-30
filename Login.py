@@ -1,3 +1,4 @@
+# pyrefly: ignore [missing-import]
 from flask import Flask, request, render_template, redirect, url_for
 
 # Initialize Flask app
@@ -24,10 +25,17 @@ def login():
     # Basic authentication logic for demonstration
     # Replace this with your actual database/authentication validation
     if username == "admin" and password == "admin":
-        return "<h3>Login Successful!</h3><p>Welcome to FaceAttend.</p>" # Here you would redirect to the main app dashboard
+        return redirect(url_for('main_page'))
     else:
-        # For a real application, you would use flash messages and redirect back to login
-        return "<h3>Login Failed!</h3><p>Invalid username or password. <a href='/'>Try again</a></p>"
+        # Redirect back to home with an error parameter
+        return redirect(url_for('home', error='invalid'))
+
+@app.route('/main')
+def main_page():
+    """
+    Serves the main dashboard page (main.html).
+    """
+    return render_template('main.html')
 
 if __name__ == '__main__':
     print("Starting FaceAttend Login Server...")

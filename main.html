@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <title>FaceAttend - Dashboard</title>
+</head>
+
+<body>
+    <!-- Background Video -->
+    <video autoplay muted loop id="bg-video">
+        <source src="assets/BgVideo.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+    </video>
+
+    <!-- Dark Overlay for better contrast -->
+    <div class="overlay"></div>
+
+    <!-- Dashboard Container -->
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <img src="assets/Logo.png" alt="Logo">
+                <h2>FaceAttend</h2>
+            </div>
+            <ul class="sidebar-menu">
+                <li class="sidebar-menu-item active">
+                    <a href="#">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4zM14 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2v-4z"></path></svg>
+                        Dashboard
+                    </a>
+                </li>
+                <li class="sidebar-menu-item">
+                    <a href="#" onclick="showModal('comingSoonModal', 'Camera Configuration', 'Dynamic Camera stream configurations, multithreading control, and frame-rate settings will be available in the release.')">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                        Camera Config
+                    </a>
+                </li>
+                <li class="sidebar-menu-item">
+                    <a href="#" onclick="showModal('comingSoonModal', 'Student Directory', 'Integrate and sync student lists, register faces, and map biometric signatures in real-time.')">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        Student Directory
+                    </a>
+                </li>
+                <li class="sidebar-menu-item">
+                    <a href="#" onclick="showModal('comingSoonModal', 'Analytics & Reports', 'Export detailed presence stats, absent timelines, and CSV tables for payroll and institution sync.')">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2z"></path></svg>
+                        Analytics
+                    </a>
+                </li>
+                <li class="sidebar-menu-item">
+                    <a href="#" onclick="showModal('comingSoonModal', 'Control Panel & System Settings', 'Advanced hyperparameter optimization, threshold levels for OpenCV model prediction, and network relays.')">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                        Settings
+                    </a>
+                </li>
+            </ul>
+            <div class="sidebar-footer">
+                <button class="logout-btn" onclick="logout()">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                    Log Out
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Nav -->
+            <header class="top-nav">
+                <div class="welcome-section">
+                    <h1>FaceAttend Control Station</h1>
+                    <p>Smart real-time biometric tracking console</p>
+                </div>
+                <div class="status-panel">
+                    <div id="clock" class="time-display">--:--:-- --</div>
+                    <div class="status-pill">
+                        <span class="status-pulse"></span>
+                        <span id="system-status-text">Active System</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Stats Grid -->
+            <section class="stats-grid">
+                <div class="stat-card" onclick="flashCard(this)">
+                    <div class="stat-info">
+                        <h3>Students Present</h3>
+                        <div class="value" id="present-count">38</div>
+                    </div>
+                    <div class="stat-icon" style="background: rgba(0, 255, 135, 0.1); color: var(--success-color);">
+                        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                </div>
+                <div class="stat-card" onclick="flashCard(this)">
+                    <div class="stat-info">
+                        <h3>Students Absent</h3>
+                        <div class="value" id="absent-count">7</div>
+                    </div>
+                    <div class="stat-icon" style="background: rgba(255, 82, 82, 0.1); color: var(--danger-color);">
+                        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                </div>
+                <div class="stat-card" onclick="flashCard(this)">
+                    <div class="stat-info">
+                        <h3>Attendance Rate</h3>
+                        <div class="value" id="attendance-rate">84.4%</div>
+                    </div>
+                    <div class="stat-icon">
+                        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                    </div>
+                </div>
+                <div class="stat-card" onclick="flashCard(this)">
+                    <div class="stat-info">
+                        <h3>Active Camera</h3>
+                        <div class="value">CAM_01</div>
+                    </div>
+                    <div class="stat-icon" style="background: rgba(0, 210, 255, 0.1); color: var(--primary-color);">
+                        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Dashboard Columns -->
+            <section class="dashboard-row">
+                <!-- Left: Biometric Recognition Terminal -->
+                <div class="panel">
+                    <div class="panel-header">
+                        <h2 class="panel-title">Biometric Scanner</h2>
+                        <span style="font-size: 13px; color: var(--text-muted);">Threshold: <b style="color:var(--primary-color);">0.65</b></span>
+                    </div>
+
+                    <!-- Camera Container -->
+                    <div class="camera-container">
+                        <!-- Actual Video Stream (Will start when startWebcam() is clicked) -->
+                        <video id="webcam-feed" autoplay playsinline muted></video>
+
+                        <!-- Camera Overlay Visuals -->
+                        <div class="camera-overlay" id="cam-overlay">
+                            <div class="laser-scanner"></div>
+                            <div class="target-box"></div>
+                        </div>
+
+                        <!-- Fallback / Inactive Screen -->
+                        <div class="camera-placeholder" id="cam-placeholder">
+                            <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z"></path>
+                            </svg>
+                            <h3>Camera Feed Offline</h3>
+                            <p style="max-width: 320px; font-size: 13px;">Enable local device camera access or run the Python Model Training script to link virtual camera systems.</p>
+                        </div>
+                    </div>
+
+                    <!-- Console Logs -->
+                    <div class="system-console" id="console-logs">
+                        <div class="console-line warning">[SYSTEM] Biometric recognition core waiting for feed...</div>
+                    </div>
+
+                    <!-- Action buttons -->
+                    <div class="camera-actions">
+                        <button class="action-btn action-btn-primary" id="toggle-cam-btn" onclick="toggleCamera()">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                            Start Camera Feed
+                        </button>
+                        <button class="action-btn action-btn-secondary" id="register-face-btn" onclick="openRegisterModal()" disabled>
+                            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path></svg>
+                            Register New Face
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right: Live Attendance Logging -->
+                <div class="panel">
+                    <div class="panel-header">
+                        <h2 class="panel-title">Real-time Activity</h2>
+                        <button class="action-btn action-btn-secondary" style="padding: 6px 12px; font-size: 12px; height: 30px;" onclick="triggerCsvExport()">Export Log</button>
+                    </div>
+
+                    <div class="log-list" id="activity-log-list">
+                        <!-- Dynamic Logs added here -->
+                        <div class="log-item">
+                            <div class="log-user">
+                                <div class="log-avatar" style="background: linear-gradient(135deg, #a855f7, #6366f1)">JD</div>
+                                <div class="log-info">
+                                    <div class="name">John Doe</div>
+                                    <div class="role">Computer Science • Year 3</div>
+                                </div>
+                            </div>
+                            <div class="log-time-status">
+                                <div class="log-time">01:08 PM</div>
+                                <span class="log-status present">Present</span>
+                            </div>
+                        </div>
+
+                        <div class="log-item">
+                            <div class="log-user">
+                                <div class="log-avatar" style="background: linear-gradient(135deg, #ec4899, #f43f5e)">AM</div>
+                                <div class="log-info">
+                                    <div class="name">Alice Miller</div>
+                                    <div class="role">Software Eng. • Year 2</div>
+                                </div>
+                            </div>
+                            <div class="log-time-status">
+                                <div class="log-time">12:55 PM</div>
+                                <span class="log-status present">Present</span>
+                            </div>
+                        </div>
+
+                        <div class="log-item">
+                            <div class="log-user">
+                                <div class="log-avatar" style="background: linear-gradient(135deg, #3b82f6, #06b6d4)">RK</div>
+                                <div class="log-info">
+                                    <div class="name">Ryan Karr</div>
+                                    <div class="role">Data Science • Year 4</div>
+                                </div>
+                            </div>
+                            <div class="log-time-status">
+                                <div class="log-time">11:42 AM</div>
+                                <span class="log-status present">Present</span>
+                            </div>
+                        </div>
+
+                        <div class="log-item">
+                            <div class="log-user">
+                                <div class="log-avatar" style="background: rgba(255,255,255,0.1); color: var(--text-muted)">SB</div>
+                                <div class="log-info">
+                                    <div class="name">Sarah Brown</div>
+                                    <div class="role">Computer Science • Year 3</div>
+                                </div>
+                            </div>
+                            <div class="log-time-status">
+                                <div class="log-time">-- : --</div>
+                                <span class="log-status absent">Absent</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Generic Modal Dialog -->
+    <div class="modal" id="comingSoonModal">
+        <div class="modal-content">
+            <h3 class="modal-title" id="modal-title-text">
+                <svg width="24" height="24" fill="none" stroke="var(--primary-color)" stroke-width="2" viewBox="0 0 24 24"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                Feature Preview
+            </h3>
+            <p class="modal-body" id="modal-body-text">
+                This management node is preparing full pipeline synchronization. Live camera multithreading is actively linking.
+            </p>
+            <div class="modal-actions">
+                <button class="action-btn action-btn-primary" onclick="hideModal('comingSoonModal')">Understood</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register New Face Modal -->
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <h3 class="modal-title">
+                <svg width="24" height="24" fill="none" stroke="var(--primary-color)" stroke-width="2" viewBox="0 0 24 24"><path d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path></svg>
+                Enroll New Biometric Profile
+            </h3>
+            <p class="modal-body" style="margin-bottom: 5px;">
+                Please align the subject's face in the scanner boundary before initiating the biometric scan.
+            </p>
+            <input type="text" id="reg-name" class="modal-input" placeholder="Full Student Name" required>
+            <input type="text" id="reg-dept" class="modal-input" placeholder="Department & Class (e.g. CS Year 3)" required>
+            <div class="modal-actions">
+                <button class="action-btn action-btn-secondary" onclick="hideModal('registerModal')">Cancel</button>
+                <button class="action-btn action-btn-primary" onclick="saveNewStudent()">Capture Biometric</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // High fidelity time and date updater
+        function updateClock() {
+            const now = new Date();
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+            let seconds = now.getSeconds();
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12;
+            hours = hours ? hours : 12; // the hour '0' should be '12'
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+            
+            const timeString = `${hours}:${minutes}:${seconds} ${ampm}`;
+            document.getElementById('clock').textContent = timeString;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Global Camera Stream handling
+        let videoStream = null;
+        let isCameraActive = false;
+        let scanInterval = null;
+
+        const video = document.getElementById('webcam-feed');
+        const overlay = document.getElementById('cam-overlay');
+        const placeholder = document.getElementById('cam-placeholder');
+        const consoleLogs = document.getElementById('console-logs');
+        const toggleCamBtn = document.getElementById('toggle-cam-btn');
+        const registerBtn = document.getElementById('register-face-btn');
+
+        function addConsoleLog(message, type = 'info') {
+            const logLine = document.createElement('div');
+            logLine.className = `console-line ${type}`;
+            const time = new Date().toLocaleTimeString();
+            logLine.textContent = `[${time}] ${message}`;
+            consoleLogs.appendChild(logLine);
+            consoleLogs.scrollTop = consoleLogs.scrollHeight;
+        }
+
+        async function toggleCamera() {
+            if (isCameraActive) {
+                stopCamera();
+            } else {
+                await startCamera();
+            }
+        }
+
+        async function startCamera() {
+            addConsoleLog("Requesting local camera peripheral access...", "warning");
+            try {
+                videoStream = await navigator.mediaDevices.getUserMedia({ 
+                    video: { facingMode: "user", width: { ideal: 640 }, height: { ideal: 480 } } 
+                });
+                video.srcObject = videoStream;
+                isCameraActive = true;
+                
+                // UI changes
+                placeholder.style.opacity = '0';
+                setTimeout(() => { placeholder.style.display = 'none'; }, 500);
+                overlay.style.display = 'block';
+                toggleCamBtn.innerHTML = `<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path></svg> Turn Off Camera`;
+                toggleCamBtn.style.background = "linear-gradient(135deg, #ff5252, #f43f5e)";
+                registerBtn.disabled = false;
+
+                addConsoleLog("Camera device handshake successful. Initializing stream...", "success");
+                addConsoleLog("Biometric analysis pipeline running (Confidence margin >= 65%)", "success");
+                
+                startFaceSimulation();
+            } catch (err) {
+                console.error("Camera access failed:", err);
+                addConsoleLog("Camera device connection error: Permission denied or unavailable.", "error");
+                alert("Camera Access Error: Please ensure you grant camera permissions or verify that no other software is holding the camera handle.");
+            }
+        }
+
+        function stopCamera() {
+            if (videoStream) {
+                videoStream.getTracks().forEach(track => track.stop());
+                video.srcObject = null;
+            }
+            if (scanInterval) {
+                clearInterval(scanInterval);
+            }
+            isCameraActive = false;
+            
+            // UI changes
+            placeholder.style.display = 'flex';
+            setTimeout(() => { placeholder.style.opacity = '1'; }, 50);
+            overlay.style.display = 'none';
+            toggleCamBtn.innerHTML = `<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg> Start Camera Feed`;
+            toggleCamBtn.style.background = "linear-gradient(135deg, var(--primary-color), var(--primary-light))";
+            registerBtn.disabled = true;
+
+            addConsoleLog("[SYSTEM] Camera feed offline. Biometric scanning suspended.", "warning");
+        }
+
+        // Simulates face detection during camera stream
+        function startFaceSimulation() {
+            const studentPool = [
+                { name: "John Doe", dept: "Computer Science • Year 3" },
+                { name: "Alice Miller", dept: "Software Eng. • Year 2" },
+                { name: "Ryan Karr", dept: "Data Science • Year 4" }
+            ];
+
+            scanInterval = setInterval(() => {
+                if (!isCameraActive) return;
+                
+                const triggerType = Math.random();
+                if (triggerType < 0.3) {
+                    addConsoleLog("Scanning face boundary box...", "info");
+                } else if (triggerType < 0.5) {
+                    // Spot target student
+                    const student = studentPool[Math.floor(Math.random() * studentPool.length)];
+                    const confidence = (85 + Math.random() * 14).toFixed(1);
+                    addConsoleLog(`Face recognized: ${student.name} (${confidence}% confidence)`, "success");
+                    triggerLogEntry(student.name, student.dept, true);
+                } else if (triggerType < 0.6) {
+                    addConsoleLog("Filtering sensor noise: tracking lock stable", "info");
+                }
+            }, 6000);
+        }
+
+        function triggerLogEntry(name, dept, isPresent) {
+            const logList = document.getElementById('activity-log-list');
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            
+            // Generate initials
+            const initials = name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
+
+            // Avoid listing duplicate logs consecutively
+            const firstChild = logList.firstElementChild;
+            if (firstChild && firstChild.querySelector('.name').textContent === name) {
+                const timeEl = firstChild.querySelector('.log-time');
+                timeEl.textContent = timeStr;
+                timeEl.style.color = '#00d2ff';
+                setTimeout(() => timeEl.style.color = '', 1000);
+                return;
+            }
+
+            // Create new DOM item
+            const item = document.createElement('div');
+            item.className = 'log-item';
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(-10px)';
+            item.style.transition = 'all 0.4s ease';
+
+            const hue = Math.floor(Math.random() * 360);
+            const avatarBg = `linear-gradient(135deg, hsl(${hue}, 80%, 65%), hsl(${(hue + 40) % 360}, 80%, 50%))`;
+
+            item.innerHTML = `
+                <div class="log-user">
+                    <div class="log-avatar" style="background: ${avatarBg}">${initials}</div>
+                    <div class="log-info">
+                        <div class="name">${name}</div>
+                        <div class="role">${dept}</div>
+                    </div>
+                </div>
+                <div class="log-time-status">
+                    <div class="log-time">${timeStr}</div>
+                    <span class="log-status ${isPresent ? 'present' : 'absent'}">${isPresent ? 'Present' : 'Absent'}</span>
+                </div>
+            `;
+
+            logList.insertBefore(item, logList.firstChild);
+            
+            // Animate addition
+            setTimeout(() => {
+                item.style.opacity = '1';
+                item.style.transform = 'translateY(0)';
+            }, 50);
+
+            // Limit logs list to last 8 elements to keep layouts uniform
+            if (logList.children.length > 8) {
+                logList.removeChild(logList.lastChild);
+            }
+
+            // Update numerical indicators
+            if (isPresent) {
+                const presCount = document.getElementById('present-count');
+                const absCount = document.getElementById('absent-count');
+                const rateCount = document.getElementById('attendance-rate');
+
+                let p = parseInt(presCount.textContent) + 1;
+                let a = parseInt(absCount.textContent);
+                presCount.textContent = p;
+                
+                let rate = ((p / (p + a)) * 100).toFixed(1);
+                rateCount.textContent = `${rate}%`;
+            }
+        }
+
+        // Modal triggers
+        function showModal(modalId, title = '', body = '') {
+            const modal = document.getElementById(modalId);
+            if (title) document.getElementById('modal-title-text').innerHTML = title;
+            if (body) document.getElementById('modal-body-text').textContent = body;
+            modal.classList.add('active');
+        }
+
+        function hideModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        function openRegisterModal() {
+            showModal('registerModal');
+        }
+
+        function saveNewStudent() {
+            const nameInput = document.getElementById('reg-name');
+            const deptInput = document.getElementById('reg-dept');
+            
+            if (!nameInput.value || !deptInput.value) {
+                alert("Please fill in all biometric enrollment fields.");
+                return;
+            }
+
+            const name = nameInput.value;
+            const dept = deptInput.value;
+
+            hideModal('registerModal');
+            addConsoleLog(`Initiating laser alignment and mesh generation for [${name}]...`, "warning");
+
+            // Mock registration scan progress
+            setTimeout(() => {
+                addConsoleLog(`Captured 128 nodal points. Saving vector embeddings for ${name}...`, "info");
+                setTimeout(() => {
+                    addConsoleLog(`Biometric signature enrolled for ${name} [${dept}]`, "success");
+                    triggerLogEntry(name, dept, true);
+                    
+                    // Clear inputs
+                    nameInput.value = '';
+                    deptInput.value = '';
+                }, 1500);
+            }, 1200);
+        }
+
+        // Visual flash response on clicking stats cards
+        function flashCard(card) {
+            card.style.transform = 'scale(0.96)';
+            card.style.borderColor = 'var(--primary-color)';
+            card.style.boxShadow = '0 0 25px rgba(0, 210, 255, 0.4)';
+            setTimeout(() => {
+                card.style.transform = '';
+                card.style.borderColor = '';
+                card.style.boxShadow = '';
+            }, 250);
+        }
+
+        function triggerCsvExport() {
+            addConsoleLog("Exporting attendance logs to CSV...", "info");
+            const logs = [
+                ["Student Name", "Department & Class", "Scan Time", "Status"],
+                ["John Doe", "Computer Science • Year 3", "01:08 PM", "Present"],
+                ["Alice Miller", "Software Eng. • Year 2", "12:55 PM", "Present"],
+                ["Ryan Karr", "Data Science • Year 4", "11:42 AM", "Present"],
+                ["Sarah Brown", "Computer Science • Year 3", "N/A", "Absent"]
+            ];
+            
+            let csvContent = "data:text/csv;charset=utf-8," 
+                + logs.map(e => e.join(",")).join("\n");
+            
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", `faceattend_log_${new Date().toISOString().split('T')[0]}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            addConsoleLog("CSV download successfully dispatched to browser client.", "success");
+        }
+
+        function logout() {
+            addConsoleLog("Closing session. Redirecting to entry gate...", "warning");
+            setTimeout(() => {
+                window.location.href = "/";
+            }, 600);
+        }
+    </script>
+</body>
+
+</html>
