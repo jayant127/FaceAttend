@@ -27,6 +27,11 @@
 
             <p class="subtitle">Welcome back! Please login to your account.</p>
 
+            <!-- Success Banner -->
+            <div id="success-message" class="success-banner" style="display: none; color: #00ff87; background: rgba(0, 255, 135, 0.1); border: 1px solid rgba(0, 255, 135, 0.25); padding: 12px; border-radius: 12px; margin-bottom: 25px; text-align: center; font-size: 14px; backdrop-filter: blur(5px); box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
+                Registration successful! You can now log in.
+            </div>
+
             <!-- Error Banner -->
             <div id="error-message" class="error-banner" style="display: none; color: #ff5252; background: rgba(255, 82, 82, 0.1); border: 1px solid rgba(255, 82, 82, 0.25); padding: 12px; border-radius: 12px; margin-bottom: 25px; text-align: center; font-size: 14px; backdrop-filter: blur(5px); box-shadow: 0 4px 10px rgba(0,0,0,0.15); animation: shake 0.5s ease-in-out;">
                 Invalid username or password! Please try again.
@@ -50,7 +55,7 @@
                 <button id="SubmitBtn" type="submit">Log In</button>
             </div>
             <div class="Signup">
-                <p>Don't have an account? <a href="#">Sign up</a></p>
+                <p>Don't have an account? <a href="/signup">Sign up</a></p>
             </div>
         </form>
     </div>
@@ -67,6 +72,10 @@
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('error') === 'invalid') {
             document.getElementById('error-message').style.display = 'block';
+            // Clear parameter from URL bar for clean refreshing
+            window.history.replaceState({}, document.title, window.location.pathname);
+        } else if (urlParams.get('success') === 'registered') {
+            document.getElementById('success-message').style.display = 'block';
             // Clear parameter from URL bar for clean refreshing
             window.history.replaceState({}, document.title, window.location.pathname);
         }
